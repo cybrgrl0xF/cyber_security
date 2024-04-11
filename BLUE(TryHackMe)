@@ -1,0 +1,71 @@
+Hi, today we're going to do yet another TryHackMe CTF (capture the flag)
+
+It is called "Blue" (refrence to the 'EternalBlue', an exploit developed by the NSA)
+
+----------P.S im using my own Debian Machine and connecting through OpenVPN
+
+
+We started the machine and we got the machine's IP address 
+
+What I like to do, is to add it to my hosts file (found at /etc/hosts)
+for easier management (give it any name you want, i go for "ip.thm")
+
+
+--"How many ports are open with a port number under 1000?
+
+We run an Nmap scan per usual and find 3 ports under 1000.
+
+--"What is this machine vulnerable to? (Answer in the form of: ms??-???, ex: ms08-067)"
+
+For this, I used Nmap again , but this time with the vulnerabilities script ( --script vuln)
+
+And we found our CVE, CVE-2017-0143 or ms17-010(the correct answer for this question)
+
+--"Find the exploitation code we will run against the machine. What is the full path of the code? (Ex: exploit/........)"
+
+For this, I booted up Metasploit and searched for "eternalblue"(the infamous nickname of this vulnerability)
+
+And we got our answer  "exploit/windows/smb/ms17_010_eternalblue"
+
+--"Show options and set the one required value. What is the name of this value? (All caps for submission)"
+
+Ofc , We must set RHOSTS. (The IP address of our target)
+
+----------p.s dont forget to set a payload(in this case we'll use windos/x64/meterpreter/reverse_tcp)
+
+We've run the exploit successfully and gained a MeterPreter shell
+
+--"If you haven't already, background the previously gained shell (CTRL + Z). Research online how to convert a shell to meterpreter shell in metasploit. What is the name of the post module we will use? (Exact path, similar to the exploit we previously selected) "
+
+Searched for it online and found the answer , post/multi/manage/shell_to_meterpreter
+
+Select this (use MODULE_PATH). Show options, what option are we required to change?
+
+The Answer is SESSION
+
+We used the command "getsystem" and found out we are in fact NT AUTHORITY\SYSTEM
+
+--"Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user?"
+
+We found 3 users
+Administrator
+Guest
+Jon
+
+The obvious answer is Jon
+
+--"Copy this password hash to a file and research how to crack it. What is the cracked password?"
+
+We know its a NTLM hash. So we used John paired with the rockyou list to crack it
+
+The password is alqfna22
+ 
+Now its flag collecting time.
+
+We found the first flag at the system root
+
+We found the second flag in C:/WINDOWS/SYSTEM32/config 
+
+And we found the last flag in Jon's Documents Folder
+
+We are all done!
