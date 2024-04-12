@@ -1,0 +1,92 @@
+Hi again.
+
+Today we'll be doing another CTF from TryHackMe called "Daily Bugle"
+
+Its difficulty is ranked as "hard" , but that shouldn't scare us away , so lets give it a shot.
+
+As per usual, I add the IP of the machine to my hosts file for easier tracking.
+
+-----"Access the web server, who robbed the bank?"
+
+We access the web server and see a blog-type site called "Daily Bugle"
+
+The only post we see is titled "Spider-Man robs bank!" , so the answer to our question is "SpiderMan"
+
+-----"What is the Joomla version?"
+
+Recon is key as always, and Google is our best friend.
+
+I quickly found a website explaining how to find the version of any joomla website.
+
+I tried every method mentioned in the article and found that this template "http://www.[thejoomlawebsite].com/administrator/manifests/files/joomla.xml" works for us. 
+
+The answer being , 3.7.0
+
+-----"What is Jonah's cracked password?" 
+
+I searched if this service has any known vulnerabilities, and I got lucky.
+
+I found that it is indeed vulnerable to SQLI
+
+TryHackMe recommends we use a python script (as suggested by a hint)
+
+We found a nice one on github.
+
+And we got a user jonah, an email, and a hashed password.
+
+Lets find what type of hash it is. I searched the first four characters "$2y$", and found it is a bcrypt hash.
+
+Lets crak it using JTR (John the Ripper or just John)
+
+We put the hash in a file and start the proccess, the syntax should look something like this
+
+"john hash.txt --wordlist=rockyou.txt --format=bcrypt"
+
+And we got our password "spiderman123"
+
+Lets login onto the Administrator Panel
+
+My first idea is, We should try and edit a template, and change it to a php reverse shell.
+
+A very good Php shell is pentestmonkey's shell you can find on github.
+
+We upload it, try and access the template we just modified aaaand we got a revers shell
+
+(dont forget to start a netcat listener;)
+
+We now need to escalate our privileges.
+
+Found a user jjameson in the home directory
+
+Tried to access it but we dont have the permission
+
+Ran sudo -l to see if we can run any commands as root but no success.
+
+My gut tells me we should look at the website directory (found at /var/www/html)
+
+configuration.php looks interesting, let's check it out
+
+And we found a password, nice! Let's try it on the jjameson account
+
+Nice, we got in and found the first flag.
+
+Lets get root now.
+
+As always, i ran "sudo -l" and found we can run "yum" as root
+
+We access GTFOBINS (great website btw)
+
+And search for yum.
+
+Great, we found a way to gain root, lets try it out.
+
+And we gained root, let's grab that flag
+
+
+
+Thanks for sticking by, this was fun, see yall later ^^
+
+
+
+
+
