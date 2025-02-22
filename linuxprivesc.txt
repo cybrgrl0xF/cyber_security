@@ -1,0 +1,52 @@
+Linux Privilege Escalation Checklist
+---------------------------------------------------------------------------------------------------------------
+1. Tools
+LinPeas
+Comprehensive enumeration script for Linux systems.
+Command: linpeas.sh
+Description: Scans for misconfigurations, vulnerabilities, and potential privilege escalation paths.
+GTFOBins
+A collection of Unix binaries that can be exploited to get root privileges.
+Command: find / -type f -perm -04000 -ls 2>/dev/null
+Description: Lists files with SUID or SGID bits set, which can be cross-referenced with GTFOBins for known exploitable binaries.
+Sudo
+Command: sudo -l
+Description: Lists the commands a user can run with sudo privileges. Misconfigurations can be exploited to gain root access.
+Cron Jobs
+Command: crontab -l
+Description: Lists cron jobs running with elevated privileges. Misconfigured cron jobs can be exploited to gain root access.
+Unshadow
+Command: unshadow passwd.txt shadow.txt > passwords.txt
+Description: Combines /etc/passwd and /etc/shadow files for password cracking with tools like John the Ripper.
+2. Methods
+--------------------------------------------------------------------------------------------------
+SUID/SGID Exploitation
+Identify SUID/SGID binaries using find / -type f -perm -04000 -ls 2>/dev/null.
+Cross-reference with GTFOBins to find exploitable binaries.
+Sudo Misconfigurations
+Use sudo -l to list allowed sudo commands.
+Exploit commands that can be run without a password or with insufficient restrictions.
+Cron Job Exploitation
+Identify cron jobs running with elevated privileges using crontab -l.
+Modify or replace scripts executed by cron jobs to gain root access.
+Writable Configuration Files
+Check for writable configuration files (e.g., /etc/passwd, /etc/shadow).
+Modify these files to add new users or change permissions.
+Kernel Exploits
+Identify and exploit known kernel vulnerabilities (e.g., Dirty Pipe, PwnKit).
+Use tools like Exploit Database to find relevant exploits.
+Environment Variable Manipulation
+Exploit environment variables like PATH to run malicious binaries with elevated privileges.
+3. Common Vulnerabilities
+------------------------------------------------------------------------------------------------------------
+SUID/SGID Binaries
+Misconfigured SUID/SGID binaries can allow attackers to execute commands with elevated privileges.
+Sudo Misconfigurations
+Overly permissive sudo rights can be exploited to run commands as root.
+Cron Job Misconfigurations
+Cron jobs that execute user-editable scripts can be manipulated to gain root access.
+Writable Configuration Files
+Writable /etc/passwd or /etc/shadow files can be modified to grant elevated privileges.
+Kernel Vulnerabilities
+Known kernel vulnerabilities can be exploited to gain root access.
+--------------------------------------------------------------------------------------------------------------
