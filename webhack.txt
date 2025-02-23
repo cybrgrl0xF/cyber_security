@@ -1,5 +1,3 @@
-Creating a comprehensive "Web Hacking Cheatsheet" based on the book "Web Hacking Arsenal: A Practical Guide to Modern Web Pentesting" involves distilling key concepts, vulnerabilities, and exploitation techniques into a concise format. Below is a structured cheatsheet that covers essential aspects to check during a penetration test and various exploitation methods:
-
 ### Web Hacking Cheatsheet
 
 #### 1. **Intelligence Gathering and Enumeration**
