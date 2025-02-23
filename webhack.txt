@@ -1,0 +1,99 @@
+Creating a comprehensive "Web Hacking Cheatsheet" based on the book "Web Hacking Arsenal: A Practical Guide to Modern Web Pentesting" involves distilling key concepts, vulnerabilities, and exploitation techniques into a concise format. Below is a structured cheatsheet that covers essential aspects to check during a penetration test and various exploitation methods:
+
+### Web Hacking Cheatsheet
+
+#### 1. **Intelligence Gathering and Enumeration**
+- **ASN and IP Blocks**: Enumerate and map IP ranges.
+- **Reverse IP Lookup**: Identify shared hosting environments.
+- **Subdomain Enumeration**: Use tools like `Amass`, `DNSValidator`, `Gobuster`, and `Subjack`.
+- **Service Scanning**: Identify open ports and running services using `Masscan` and `Httpx`.
+- **Cloud Enumeration**: Check for misconfigured AWS S3 buckets and other cloud services.
+
+#### 2. **Server-Side Injection Attacks**
+- **SQL Injection**: Test for UNION-based, error-based, boolean-based, and time-based SQLi.
+  - Use `SQLMap` for automation.
+  - Exploit to achieve Remote Code Execution (RCE).
+- **NoSQL Injection**: Test MongoDB and other NoSQL databases for injection vulnerabilities.
+- **Server-Side Template Injection (SSTI)**: Identify and exploit template engines (e.g., Jinja2, Mako).
+
+#### 3. **Client-Side Injection Attacks (XSS)**
+- **Types of XSS**: Reflected, Stored, DOM-based.
+- **Contextual Bypasses**: Bypass `htmlspecialchars` and other filters.
+- **XSS Payloads**: Use polyglots, SVGs, and other creative payloads.
+- **CSP Bypass**: Exploit unsafe-inline, unsafe-eval, data URIs, and third-party endpoints.
+- **Phishing and Keylogging**: Use XSS to steal credentials and log keystrokes.
+
+#### 4. **Cross-Site Request Forgery (CSRF)**
+- **CSRF Payloads**: Construct payloads for GET and POST requests.
+- **JSON-Based CSRF**: Exploit JSON parsing vulnerabilities.
+- **Bypass Weak Defenses**: Test for predictable tokens, unverified tokens, and weak referer/origin checks.
+- **SameSite Cookies**: Test for bypasses using subdomains and other techniques.
+
+#### 5. **Web Application File System Attacks**
+- **Directory Traversal**: Test for path traversal vulnerabilities.
+- **File Inclusion**: Exploit LFI to RCE using wrappers, log files, and race conditions.
+- **File Uploads**: Bypass client-side and server-side restrictions.
+  - Use MIME-type bypasses, magic bytes, and EXIF data injection.
+
+#### 6. **Authentication and Authorization Attacks**
+- **Username Enumeration**: Test for timing attacks and brute force.
+- **Account Lockout**: Bypass rate limiting and CAPTCHA.
+- **Forgot Password**: Exploit predictable reset tokens and host header injection.
+- **OAuth and SAML**: Steal tokens and exploit misconfigurations.
+- **Multi-Factor Authentication (MFA)**: Bypass OTP and other MFA mechanisms.
+
+#### 7. **Business Logic Flaws**
+- **Unlimited Wallet Balance**: Manipulate balances and transactions.
+- **Improper Validation**: Exploit lack of validation in business logic.
+- **Race Conditions**: Exploit race conditions in voting, account creation, and coupon codes.
+
+#### 8. **XXE, SSRF, and Request Smuggling**
+- **XXE (XML External Entity)**: Exploit for local file read and RCE.
+  - Use OOB (Out-of-Band) channels for blind XXE.
+- **SSRF (Server-Side Request Forgery)**: Exploit for port scanning, file read, and RCE.
+  - Chain with Redis, DNS rebinding, and other techniques.
+- **HTTP Request Smuggling**: Exploit CL.TE and other techniques for persistent XSS.
+
+#### 9. **Serialization Attacks**
+- **Insecure Deserialization**: Exploit PHP, Java, .NET, and Python deserialization.
+  - Use gadgets and payloads to achieve RCE.
+- **PHP Object Injection**: Exploit magic functions and input parameters.
+
+#### 10. **Web Services and Cloud Services**
+- **SOAP and REST API**: Test for hidden methods, excessive data exposure, and unauthorized modifications.
+- **GraphQL**: Enumerate endpoints and exploit introspection queries.
+- **Serverless Applications**: Test for event injection and sensitive information exposure.
+
+#### 11. **HTML5 Vulnerabilities**
+- **CORS (Cross-Origin Resource Sharing)**: Exploit weak access control and open redirects.
+- **Web Storage**: Test for session hijacking and second-order DOM XSS.
+- **IndexedDB**: Exploit vulnerabilities in data storage.
+- **Web Messaging**: Exploit postMessage API for DOM XSS.
+- **Web Workers**: Exploit for DDoS and password cracking.
+
+#### 12. **Evasion Techniques**
+- **WAF Bypass**: Use encoded payloads, non-alphanumeric JavaScript, and DOM-based techniques.
+  - Test with various attributes, tags, and pseudo-protocols.
+- **Fingerprint WAF**: Identify and tailor bypass techniques for specific WAFs.
+
+#### 13. **Report Writing**
+- **Executive Summary**: Provide a high-level overview and recommendations.
+- **Findings Summary**: Highlight strengths and weaknesses.
+- **Risk Assessment**: Use CVSS scoring and risk matrices.
+- **Technical Report**: Document methodology, findings, and evidence.
+
+### Tools and Resources
+- **Enumeration**: `Amass`, `DNSValidator`, `Gobuster`, `Masscan`, `Httpx`
+- **Injection**: `SQLMap`, `NoSQLMap`
+- **XSS**: `XSStrike`, `Dalfox`
+- **CSRF**: `OWASP ZAP`, `CSRF POC Generator`
+- **File System**: `FFUF`, `Burp Suite`
+- **Authentication**: `Hydra`, `Burp Suite`
+- **Business Logic**: Custom scripts and manual testing
+- **XXE/SSRF**: `Burp Suite`, `Swissky Toolkit`
+- **Serialization**: `YSOSerial`, `Gadget Inspector`
+- **Web Services**: `Postman`, `Burp Suite`
+- **HTML5**: `Burp Suite`, `OWASP ZAP`
+- **Evasion**: `Bypass Payloads`, `WAF Bypass Cheat Sheet`
+
+This cheatsheet provides a structured approach to identifying and exploiting common web application vulnerabilities during a penetration test. Always ensure you have proper authorization before conducting any security testing.
