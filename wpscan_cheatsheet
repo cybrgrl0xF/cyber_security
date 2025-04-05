@@ -1,0 +1,67 @@
+WPScan Cheat Sheet
+
+Basic Usage
+wpscan --url <target-url> [options]
+
+Common Options
+Scan Types
+Command	Description
+--enumerate u	Enumerate usernames
+--enumerate p	Enumerate plugins
+--enumerate t	Enumerate themes
+--enumerate vp	Enumerate vulnerable plugins
+--enumerate vt	Enumerate vulnerable themes
+--enumerate cb	Enumerate config backups
+--enumerate dbe	Enumerate database exports
+--enumerate ap	Enumerate all plugins (time-consuming)
+--enumerate at	Enumerate all themes (time-consuming)
+--enumerate tt	Enumerate timthumbs
+--enumerate m	Enumerate media IDs
+Authentication & Brute Force
+Command	Description
+--passwords <wordlist>	Specify a password wordlist
+--usernames <user-list>	Specify a list of usernames
+--wp-content-dir <dir>	Custom wp-content directory
+--max-threads <number>	Set max threads for brute force
+Proxy & Stealth
+Command	Description
+--proxy <proxy-url>	Use a proxy (e.g., http://127.0.0.1:8080)
+--random-user-agent	Use a random user agent
+--throttle <milliseconds>	Delay between requests
+--request-timeout <seconds>	Set request timeout
+Output & Logging
+Command	Description
+--output <file>	Save results to a file
+--format <format>	Output format (cli, json, xml)
+--no-banner	Hide the banner
+--verbose	Show verbose output
+API & Updates
+Command	Description
+--api-token <token>	Use WPVulnDB API for vulnerability checks
+--update	Update WPScan database
+
+--Examples--
+
+
+Basic Scan
+wpscan --url https://example.com
+
+
+Enumerate Users & Plugins
+wpscan --url https://example.com --enumerate u,p
+
+
+Brute Force Attack
+wpscan --url https://example.com --usernames admin --passwords /path/to/wordlist.txt
+
+
+Stealthy Scan with Proxy
+wpscan --url https://example.com --proxy http://127.0.0.1:8080 --random-user-agent --throttle 1000
+
+
+Save Results to JSON
+wpscan --url https://example.com --format json --output scan_results.json
+
+
+Check for Vulnerabilities with API
+wpscan --url https://example.com --api-token YOUR_API_TOKEN --enumerate vp,vt
